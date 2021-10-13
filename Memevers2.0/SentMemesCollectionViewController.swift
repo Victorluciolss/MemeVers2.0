@@ -1,6 +1,6 @@
 //
 //  SentMemesCollectionViewController.swift
-//  Memevers1.0
+//  Memevers2.0
 //
 //  Created by Victor Lucio on 12/10/21.
 //
@@ -15,7 +15,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
-}
+    }
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -32,8 +32,8 @@ class SentMemesCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
-//        self.tabBarController?.tabBar.isHidden = false
-}
+        //        self.tabBarController?.tabBar.isHidden = false
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return appDelegate.memes.count
@@ -46,7 +46,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
         
         cell.memeImageView.image = meme.memedImage
         
-  
+        
         
         return cell
     }
