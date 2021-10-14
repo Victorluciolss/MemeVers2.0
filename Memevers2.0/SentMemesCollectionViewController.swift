@@ -43,19 +43,27 @@ class SentMemesCollectionViewController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         let meme = appDelegate.memes[(indexPath as NSIndexPath).row]
-        
         cell.memeImageView.image = meme.memedImage
-        
-        
         
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let memeViewController = storyboard?.instantiateViewController(withIdentifier: "CreateMemeViewController") as! ViewController
+        
+        memeViewController.oldTopText = memes[indexPath.row].topText
+        memeViewController.oldBottomText = memes[indexPath.row].bottomText
+        memeViewController.oldImage = memes[indexPath.row].originalImage
+        
+        present(memeViewController, animated: true, completion: nil)
+    }
+    
     @IBAction func onAddPress(_ sender: Any) {
-        let memeGeneratorVC = storyboard?.instantiateViewController(withIdentifier: "CreateMemeViewController") as! ViewController
+        let memeViewController = storyboard?.instantiateViewController(withIdentifier: "CreateMemeViewController") as! ViewController
         
-        memeGeneratorVC.onDisappear = collectionView.reloadData
+        memeViewController.onDisappear = collectionView.reloadData
         
-        present(memeGeneratorVC, animated: true, completion: nil)
+        present(memeViewController, animated: true, completion: nil)
     }
 }

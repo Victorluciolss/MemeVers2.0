@@ -15,11 +15,6 @@ class SentMemesTableViewController: UITableViewController {
         return appDelegate.memes
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -37,22 +32,29 @@ class SentMemesTableViewController: UITableViewController {
         let cellReuse = "cellReuse"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuse, for: indexPath)
         cell.imageView?.image = memes[ indexPath.row ].memedImage
-        
-        
         cell.textLabel?.text = memes[indexPath.row].topText
-        
-        
         
         return cell
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let memeViewController = storyboard?.instantiateViewController(withIdentifier: "CreateMemeViewController") as! ViewController
+        
+        memeViewController.oldTopText = memes[indexPath.row].topText
+        memeViewController.oldBottomText = memes[indexPath.row].bottomText
+        memeViewController.oldImage = memes[indexPath.row].originalImage
+        
+        present(memeViewController, animated: true, completion: nil)
+    }
+    
     @IBAction func onAddPress(_ sender: Any) {
-        let memeGeneratorVC = storyboard?.instantiateViewController(withIdentifier: "CreateMemeViewController") as! ViewController
+        let memeViewController = storyboard?.instantiateViewController(withIdentifier: "CreateMemeViewController") as! ViewController
         
-        memeGeneratorVC.onDisappear = tableView.reloadData
+        memeViewController.onDisappear = tableView.reloadData
         
-        present(memeGeneratorVC, animated: true, completion: nil)
+        present(memeViewController, animated: true, completion: nil)
     }
     
     

@@ -36,16 +36,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         super.viewDidLoad()
         defineTextField(textFieldTop, "TOP")
         defineTextField(textFieldBottom, "BOTTOM")
+        shareButton.isEnabled = false
         
         if oldTopText != nil && oldBottomText != nil && oldImage != nil{
-            
             textFieldTop.text = oldTopText
             textFieldBottom.text = oldBottomText
             imageView.image = oldImage
-            
+            shareButton.isEnabled = true
         }
-        
-        shareButton.isEnabled = false
         
     }
     
